@@ -116,14 +116,31 @@ describe Market do
     it "give an array items that are overstocked" do
       vendor1.stock(item1, 35)
       vendor1.stock(item2, 7)
+      vendor1.stock(item2, 10)
       vendor2.stock(item4, 50)
       vendor2.stock(item3, 25)
+      vendor2.stock(item3, 20)
       vendor3.stock(item1, 65)
       market.add_vendor(vendor1)
       market.add_vendor(vendor2)
       market.add_vendor(vendor3)
 
       expect(market.overstocked_items).to eq ([item1])
+    end
+
+    it "give an array items that are overstocked 2" do
+      vendor1.stock(item1, 35)
+      vendor1.stock(item2, 7)
+      vendor2.stock(item2, 50)
+      vendor2.stock(item4, 50)
+      vendor2.stock(item3, 25)
+      vendor2.stock(item3, 20)
+      vendor3.stock(item1, 65)
+      market.add_vendor(vendor1)
+      market.add_vendor(vendor2)
+      market.add_vendor(vendor3)
+
+      expect(market.overstocked_items).to eq ([item1, item2])
     end
   end
 end

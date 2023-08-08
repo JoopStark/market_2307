@@ -34,13 +34,14 @@ class Market
     sorted_item_list_objects.each do |item, amount|
        hash[item] = {quantity: amount, vendors: vendors_that_sell(item) }
     end
+    # binding.pry
     hash
   end
 
   def sorted_item_list_objects
-    item_hash = Hash.new(0)
+    item_hash = {}
     @vendors.each do |vendor| 
-      item_hash.merge!(vendor.inventory)
+      item_hash.merge!(vendor.inventory){ |key , orginal, vendor_inventory| orginal + vendor_inventory}
     end
     item_hash
   end
@@ -50,12 +51,6 @@ class Market
       hash[:quantity] > 50 && hash[:vendors].count > 1
     end.keys
   end
-
-
-
-
-
-
 
 end
 
