@@ -82,4 +82,49 @@ describe Market do
       expect(vendor3.potential_revenue).to eq (48.75)
     end
   end
+
+  describe "#sorted_item_list" do
+    it "gives a list of all item names in the market alphbetically" do
+      vendor1.stock(item1, 35)
+      vendor1.stock(item2, 7)
+      vendor2.stock(item4, 50)
+      vendor2.stock(item3, 25)
+      vendor3.stock(item1, 65)
+      market.add_vendor(vendor1)
+      market.add_vendor(vendor2)
+      market.add_vendor(vendor3)
+
+      expect(market.sorted_item_list).to eq (["Banana Nice Cream", "Peach", "Peach-Raspberry Nice Cream", "Tomato"])
+    end
+  end
+
+  describe "#total_inventory" do
+    it "gives a hash that includes item name, total stock, and vendors" do
+      vendor1.stock(item1, 35)
+      vendor1.stock(item2, 7)
+      vendor2.stock(item4, 50)
+      vendor2.stock(item3, 25)
+      vendor3.stock(item1, 65)
+      market.add_vendor(vendor1)
+      market.add_vendor(vendor2)
+      market.add_vendor(vendor3)
+
+      expect(market.total_inventory).to be_a Array
+    end
+  end
+
+  describe "#overstocked_items" do
+    it "give an array items that are overstocked" do
+      vendor1.stock(item1, 35)
+      vendor1.stock(item2, 7)
+      vendor2.stock(item4, 50)
+      vendor2.stock(item3, 25)
+      vendor3.stock(item1, 65)
+      market.add_vendor(vendor1)
+      market.add_vendor(vendor2)
+      market.add_vendor(vendor3)
+
+      expect(market.overstocked_items).to eq ([vendor1, vendor3])
+    end
+  end
 end
