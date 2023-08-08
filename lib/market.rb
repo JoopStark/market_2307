@@ -33,6 +33,7 @@ class Market
     sorted_item_list_objects.map do |item, amount|
       {item.name => {quantity: amount, vendors: vendors_that_sell(item) }}
     end
+    # binding.pry
   end
 
   def sorted_item_list_objects
@@ -44,7 +45,11 @@ class Market
   end
 
   def overstocked_items
-    
+    total_inventory.select do |item|
+            item[:quantity] > 50 && item[vendors].count > 1
+    end
+  end
+
 
 
 

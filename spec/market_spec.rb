@@ -108,7 +108,6 @@ describe Market do
       market.add_vendor(vendor1)
       market.add_vendor(vendor2)
       market.add_vendor(vendor3)
-
       expect(market.total_inventory).to be_a Array
     end
   end
