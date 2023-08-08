@@ -108,7 +108,7 @@ describe Market do
       market.add_vendor(vendor1)
       market.add_vendor(vendor2)
       market.add_vendor(vendor3)
-      expect(market.total_inventory).to be_a Array
+      expect(market.total_inventory).to be_a Hash
     end
   end
 
@@ -123,7 +123,7 @@ describe Market do
       market.add_vendor(vendor2)
       market.add_vendor(vendor3)
 
-      expect(market.overstocked_items).to eq ([vendor1, vendor3])
+      expect(market.overstocked_items).to eq ([item1])
     end
   end
 end
